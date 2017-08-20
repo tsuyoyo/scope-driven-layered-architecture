@@ -4,7 +4,8 @@
 - `EventRegister` screen is a kind of input form feature, build with multiple screen
 - By defining `scope`, assign appropriate lifecycle to each data and make secure for Activity re-creation
 
-[preview](./gif/gifan.gif)
+[preview](https://drive.google.com/file/d/0B_iRA4QiMU-ESzZTbi1NbFh3MVU/view?usp=sharing) 
+(even if Activity re-creation happens, you can see data is not lost although `saveInstanceState` / `onRetainCustomNonConfigurationInstance` are not used)
 
 ## Points of this approach
 
