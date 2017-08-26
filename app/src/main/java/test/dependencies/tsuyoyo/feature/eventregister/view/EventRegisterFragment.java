@@ -31,7 +31,7 @@ public class EventRegisterFragment extends Fragment {
 
     private CompositeDisposable disposables = new CompositeDisposable();
 
-    static EventRegisterFragment createInstance() {
+    static public EventRegisterFragment createInstance() {
         return new EventRegisterFragment();
     }
 

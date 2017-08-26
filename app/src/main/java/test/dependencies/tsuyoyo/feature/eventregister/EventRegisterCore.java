@@ -2,6 +2,7 @@ package test.dependencies.tsuyoyo.feature.eventregister;
 
 import io.reactivex.Flowable;
 import io.reactivex.processors.BehaviorProcessor;
+import io.reactivex.processors.PublishProcessor;
 import test.dependencies.tsuyoyo.feature.model.Event;
 import test.dependencies.tsuyoyo.feature.model.Prefecture;
 
@@ -10,8 +11,7 @@ public class EventRegisterCore {
     private final BehaviorProcessor<Event> event =
             BehaviorProcessor.createDefault(new Event("", "",  new Prefecture(-1, "no pref")));
 
-    private final BehaviorProcessor<EventRegisterStep> currentStep =
-            BehaviorProcessor.createDefault(EventRegisterStep.TOP);
+    private final PublishProcessor<EventRegisterStep> currentStep = PublishProcessor.create();
 
     public Flowable<Event> observeEvent() {
         return event.hide();

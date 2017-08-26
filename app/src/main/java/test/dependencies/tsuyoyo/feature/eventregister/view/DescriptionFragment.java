@@ -18,9 +18,9 @@ import test.dependencies.tsuyoyo.MyApplication;
 import test.dependencies.tsuyoyo.feature.eventregister.step.DescriptionViewModel;
 import test.dependencies.tsuyoyo.ui.R;
 
-public class DescriptionFragment extends Fragment {
+public class DescriptionFragment extends Fragment implements EventRegisterStepView {
 
-    static DescriptionFragment createInstance() {
+    static public DescriptionFragment createInstance() {
         return new DescriptionFragment();
     }
 
@@ -50,7 +50,12 @@ public class DescriptionFragment extends Fragment {
             viewModel.input.apply(d);
         });
 
-        view.setFocusableInTouchMode(true);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         view.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                 viewModel.input.cancel();
@@ -58,8 +63,8 @@ public class DescriptionFragment extends Fragment {
             }
             return false;
         });
-
-        return view;
+        view.requestFocus();
+        view.setFocusableInTouchMode(true);
     }
 
     @Override
@@ -83,5 +88,13 @@ public class DescriptionFragment extends Fragment {
     public void onStop() {
         super.onStop();
         disposables.clear();
+    }
+
+    @Override
+    public void onStepCancelled() {
+        MyApplication.featureScopeComponents(getContext())
+                .eventRegister()
+                .viewModelComponents()
+                .releaseDescriptionComponent();
     }
 }

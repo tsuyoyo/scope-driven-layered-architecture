@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import test.dependencies.tsuyoyo.feature.eventregister.view.EventRegisterRootActivity;
+import test.dependencies.tsuyoyo.feature.eventregister.EventRegisterRootActivity;
 import test.dependencies.tsuyoyo.ui.R;
 
 public class MainActivity extends AppCompatActivity {

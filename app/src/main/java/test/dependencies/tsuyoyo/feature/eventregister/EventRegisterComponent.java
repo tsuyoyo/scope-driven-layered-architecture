@@ -5,7 +5,6 @@ import dagger.Module;
 import dagger.Provides;
 import test.dependencies.tsuyoyo.app.AppComponent;
 import test.dependencies.tsuyoyo.di.scope.EventRegisterScope;
-import test.dependencies.tsuyoyo.feature.eventregister.view.EventRegisterRootActivity;
 import test.dependencies.tsuyoyo.feature.model.AppData;
 
 @EventRegisterScope

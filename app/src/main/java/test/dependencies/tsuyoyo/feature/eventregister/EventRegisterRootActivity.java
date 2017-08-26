@@ -1,4 +1,4 @@
-package test.dependencies.tsuyoyo.feature.eventregister.view;
+package test.dependencies.tsuyoyo.feature.eventregister;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,8 +12,10 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import test.dependencies.tsuyoyo.MyApplication;
-import test.dependencies.tsuyoyo.feature.eventregister.EventRegisterCore;
-import test.dependencies.tsuyoyo.feature.eventregister.EventRegisterStep;
+import test.dependencies.tsuyoyo.feature.eventregister.view.DescriptionFragment;
+import test.dependencies.tsuyoyo.feature.eventregister.view.EventRegisterFragment;
+import test.dependencies.tsuyoyo.feature.eventregister.view.EventRegisterStepView;
+import test.dependencies.tsuyoyo.feature.eventregister.view.PrefectureFragment;
 import test.dependencies.tsuyoyo.ui.R;
 
 public class EventRegisterRootActivity extends AppCompatActivity {
@@ -36,6 +38,9 @@ public class EventRegisterRootActivity extends AppCompatActivity {
                 .inject(this);
         setContentView(R.layout.activity_event_register);
 
+        if (savedInstanceState == null) {
+            gotoTop();
+        }
     }
 
     @Override
@@ -56,21 +61,21 @@ public class EventRegisterRootActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            return true;
-        } else {
-            return super.onKeyDown(keyCode, event);
-        }
-    }
-
-    @Override
     public void finish() {
         super.finish();
 
         // Exit from @EventRegister scope
         MyApplication.featureScopeComponents(this).releaseEventRegisterComponents();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        FragmentManager fm = getSupportFragmentManager();
+        if (keyCode == KeyEvent.KEYCODE_BACK && fm.getBackStackEntryCount() > 0) {
+            String tag = fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName();
+            ((EventRegisterStepView) fm.findFragmentByTag(tag)).onStepCancelled();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void onStepChanged(EventRegisterStep step) {

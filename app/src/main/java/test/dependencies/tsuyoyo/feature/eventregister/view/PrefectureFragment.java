@@ -19,9 +19,9 @@ import test.dependencies.tsuyoyo.feature.model.Prefecture;
 import test.dependencies.tsuyoyo.ui.R;
 
 public class PrefectureFragment extends Fragment
-        implements PrefectureAdapter.PrefectureAdapterListener {
+        implements PrefectureAdapter.PrefectureAdapterListener, EventRegisterStepView {
 
-    static PrefectureFragment createInstance() {
+    static public PrefectureFragment createInstance() {
         return new PrefectureFragment();
     }
 
@@ -89,5 +89,13 @@ public class PrefectureFragment extends Fragment
     @Override
     public void onPrefectureSelected(Prefecture prefecture) {
         viewModel.input.apply(prefecture);
+    }
+
+    @Override
+    public void onStepCancelled() {
+        MyApplication.featureScopeComponents(getContext())
+                .eventRegister()
+                .viewModelComponents()
+                .releasePrefectureComponent();
     }
 }

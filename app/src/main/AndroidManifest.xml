@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="test.dependencies.tsuyoyo.ui.test.dependencies.tsuyoyo.MainActivity">
+        <activity android:name="test.dependencies.tsuyoyo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="test.dependencies.tsuyoyo.feature.eventregister.view.EventRegisterRootActivity"/>
+        <activity android:name="test.dependencies.tsuyoyo.feature.eventregister.EventRegisterRootActivity"/>
 
     </application>
 
