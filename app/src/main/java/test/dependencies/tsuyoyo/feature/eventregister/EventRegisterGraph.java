@@ -10,13 +10,13 @@ import test.dependencies.tsuyoyo.feature.eventregister.step.DescriptionComponent
 import test.dependencies.tsuyoyo.feature.eventregister.step.EventRegisterTopComponent;
 import test.dependencies.tsuyoyo.feature.eventregister.step.PrefectureComponent;
 
-public class EventRegisterComponentsManager {
+public class EventRegisterGraph {
 
     private final EventRegisterComponent eventRegisterComponent;
 
     private final ViewModelComponentsHolder viewModelComponents;
 
-    public EventRegisterComponentsManager(Context context) {
+    public EventRegisterGraph(Context context) {
         eventRegisterComponent = DaggerEventRegisterComponent.builder()
                 .appComponent(MyApplication.appComponent(context))
                 .build();
